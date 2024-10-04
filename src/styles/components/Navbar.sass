@@ -1,0 +1,16 @@
+@import "@/styles/utils/fonts"
+@import "@/styles/utils/utils"
+
+.navbar
+    @apply block 
+    @apply flex flex-wrap content-between list-none m-0
+    height: $height-primary
+    padding: $padding-primary
+    font-family: $font-primary
+    a
+      @apply no-underline font-semibold 
+      @apply flex-1 relative text-center
+      color: $color-text
+      border-left: solid 1px
+    a:first-child
+      border-left: none
