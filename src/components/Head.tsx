@@ -1,31 +1,42 @@
 /* eslint-disable */
 import * as THREE from "three";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Canvas, RenderCallback, useFrame } from "@react-three/fiber";
+import "@/styles/components/Greeting.sass";
+import { easing } from "maath";
+import { useGLTF } from "@react-three/drei";
 
 function Box(props: JSX.IntrinsicElements["mesh"]) {
   // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef<THREE.Mesh>(null!);
-  useFrame(
-    (state: RenderCallback, delta: number) =>
-      (ref.current.rotation.y += delta * 0.5),
-  );
+  const ref = useRef<THREE.Mesh>(null);
+  const { nodes } = useGLTF("./suzanne.glb");
+  console.log(nodes);
+  const [dummy] = useState<THREE.Object3D>(() => new THREE.Object3D());
+
+  useFrame((state: RenderCallback, delta: number) => {
+    if (ref.current) {
+      dummy.lookAt(state.pointer.x, state.pointer.y, 1);
+      easing.dampQ(ref.current.quaternion, dummy.quaternion, 0.15, delta);
+    }
+  });
 
   return (
-    <mesh {...props} ref={ref}>
-      <boxGeometry args={[3, 3, 3]} />
+    <mesh {...props} ref={ref} geometry={nodes.Suzanne.geometry} scale={2}>
       <meshMatcapMaterial />
     </mesh>
   );
 }
 
 export default function Head() {
+  <meshMatcapMaterial />;
   return (
-    <Canvas>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} />
-      <Box position={[0, 0, 0]} />
-    </Canvas>
+    <div className="head-canvas">
+      <Canvas>
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+        <pointLight position={[-10, -10, -10]} />
+        <Box position={[0, 0, 0]} />
+      </Canvas>
+    </div>
   );
 }

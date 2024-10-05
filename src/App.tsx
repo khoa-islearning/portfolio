@@ -1,7 +1,8 @@
 import Navbar from "./components/Navbar.tsx";
 import "./App.sass";
 import { useEffect } from "react";
-import Head from "./components/Head.tsx";
+import Greeting from "./components/Greeting.tsx";
+import Action1 from "./components/Action1.tsx";
 
 function App() {
   useEffect(() => {
@@ -10,7 +11,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Head />
+      <Greeting />
+      <Action1 />
     </div>
   );
 }
