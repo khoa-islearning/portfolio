@@ -1,50 +1,55 @@
 import { useEffect, useState } from "react";
 import PCModel from "./PCModel";
+import { IoLogoPython } from "react-icons/io";
+import { BiLogoTypescript } from "react-icons/bi";
+import { SiIbm } from "react-icons/si";
 
-const DynamicText = () => {
-  const words = ["maker", "tinkerer", "explorer", "learner"];
-  const [index, setIndex] = useState(0);
+const DynamicTitle = () => {
+    const words = ["Khoa", "graduating in 2025", "a tinkerer", "an explorer", "a learner"];
+    const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 1500); // Change word every 2 seconds
+    useEffect(() => {
+        const intervalIndex = setInterval(() => {
+            setIndex((prevIndex) => (prevIndex + 1) % words.length);
+        }, 3000)
+        return () => clearInterval(intervalIndex);
+    }, []);
 
-    return () => clearInterval(intervalId);
-  }, []);
-
-  return <h1>I'm a {words[index]}</h1>;
+    return <h1>I'm {words[index]}</h1>;
 };
 
+
+
 export default function About() {
-  return (
-    <div className="about">
-      <PCModel />
-      <div className="about-text">
-        <DynamicText />
-        <p>Hi! My name is Khoa, and I will be a recent graduate in 2025.</p>
-        <p>
-          Studying Computer Science introduced me to coding and technology, soon
-          I was fascinated with the possibilities.
-        </p>
-        <p>
-          My Tech Stack: <br /> My Text Editor: Nvim \\Language: python,
-          typescript, c++ Currently I'm learning about: react, 3js, information
-          security in software
-        </p>
-        <p> Work experience + tech used + request resume</p>
-        <p> IBM Canada </p>
-        <p> Yeaman Lab </p>
-        <p> Apheleia Inc. </p>
-        <p>
-          Competitions: With my friends, we placed 2nd in HTC 2021 and won
-          CalgaryHack in Best use of Virtual Reality
-        </p>
-        <p>
-          Hobby: photography, 3dprinting, building self-host service with my
-          homelab
-        </p>
-      </div>
-    </div>
-  );
+    return (
+        <div className="about" id="about">
+            <PCModel />
+            <div className="about-text">
+                <DynamicTitle />
+                <p><b>My Tech Stack:</b></p>
+                <ul>
+                    <li>Language: <IoLogoPython style={{ cursor: "pointer" }} />, <BiLogoTypescript style={{ cursor: "pointer" }} />, C++</li>
+                    <li>Tools: Git, neovim, Docker</li>
+                    <li>Cloud: AWS, S3.</li>
+                </ul>
+                <p> <b>Work experience:</b> + job title tech used + request resume</p>
+                <ul>
+                    <li>IBM Canada </li>
+                    <li>Yeaman Lab </li>
+                    <li>Apheleia Inc. </li>
+                </ul>
+                <p><b>Competitions</b></p>
+                <ul>
+                    <li>2<sup>nd</sup> place in HTC 2021</li>
+                    <li>Best use of Virtual Reality at CalgaryHacks 2022</li>
+                </ul>
+                <p><b>Currently learning about:</b></p>
+                <ul>
+                    <li>React</li>
+                    <li>3.js</li>
+                    <li>Software Information Security</li>
+                </ul>
+            </div>
+        </div>
+    );
 }

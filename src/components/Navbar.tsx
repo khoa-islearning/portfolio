@@ -5,7 +5,7 @@ export default function Navbar() {
             <a href="/#" className="nav-item first-child">
                 Home
             </a>
-            <a href="/about" className="nav-item">
+            <a href="/#about" className="nav-item">
                 About Me
             </a>
             <a href="/" className="nav-item">
