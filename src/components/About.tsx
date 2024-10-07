@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import PCModel from "./PCModel";
 import { IoLogoPython } from "react-icons/io";
 import { BiLogoTypescript } from "react-icons/bi";
-import { SiIbm } from "react-icons/si";
 
 const DynamicTitle = () => {
     const words = ["Khoa", "graduating in 2025", "a tinkerer", "an explorer", "a learner"];
@@ -48,6 +47,7 @@ export default function About() {
                     <li>React</li>
                     <li>3.js</li>
                     <li>Software Information Security</li>
+                    <li>3D Modeling</li>
                 </ul>
             </div>
         </div>
