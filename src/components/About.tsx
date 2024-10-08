@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PCModel from "./PCModel";
 import { IoLogoPython } from "react-icons/io";
 import { BiLogoTypescript } from "react-icons/bi";
+import DropdownList, { DropdownListItem } from "./utils/DropdownList";
 
 const DynamicTitle = () => {
     const words = ["Khoa", "graduating in 2025", "a tinkerer", "an explorer", "a learner"];
@@ -20,6 +21,33 @@ const DynamicTitle = () => {
 
 
 export default function About() {
+    const experiences: DropdownListItem[] = [
+        {
+            title: "IBM Canada",
+            time: "May 2022-August 2023",
+            jobTitle: "QA/Test Developer Intern",
+            techUsed: [
+                "DB2", "perl", "python", "Jenkins", "Ansible", "Git", "Prometheus", "Grafana"
+            ]
+        },
+        {
+            title: "Yeaman Lab - University of Calgary",
+            time: "October 2021-May 2022",
+            jobTitle: "Research Assistant",
+            techUsed: [
+                "C#", "Unity", "R"
+            ]
+        },
+        {
+            title: "Apheleia Inc.",
+            time: "Apr 2021-October 2021",
+            jobTitle: "Backend Developer Intern",
+            techUsed: [
+                "TypeScript", "NestJS", "REST API", "Firestore"
+            ]
+        }
+    ]
+
     return (
         <div className="about" id="about">
             <PCModel />
@@ -31,12 +59,8 @@ export default function About() {
                     <li>Tools: Git, neovim, Docker</li>
                     <li>Cloud: AWS, S3.</li>
                 </ul>
-                <p> <b>Work experience:</b> + job title tech used + request resume</p>
-                <ul>
-                    <li>IBM Canada </li>
-                    <li>Yeaman Lab </li>
-                    <li>Apheleia Inc. </li>
-                </ul>
+                <p> <b>Work experience:</b></p>
+                <DropdownList items={experiences} />
                 <p><b>Competitions</b></p>
                 <ul>
                     <li>2<sup>nd</sup> place in HTC 2021</li>
