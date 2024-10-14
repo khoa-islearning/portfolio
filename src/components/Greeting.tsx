@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Head from "./Head";
 
 export default function Greeting() {
