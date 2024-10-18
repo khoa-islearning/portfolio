@@ -1,7 +1,7 @@
 /* eslint-disable */
 import * as THREE from "three";
 import { useRef, useState } from "react";
-import { Canvas, RenderCallback, useFrame } from "@react-three/fiber";
+import { Canvas, RootState, useFrame } from "@react-three/fiber";
 import "@/styles/components/Greeting.sass";
 import { easing } from "maath";
 import { useGLTF } from "@react-three/drei";
@@ -12,15 +12,15 @@ function Box(props: JSX.IntrinsicElements["mesh"]) {
     const { nodes } = useGLTF("./suzanne.glb");
     const [dummy] = useState<THREE.Object3D>(() => new THREE.Object3D());
 
-    useFrame((state: RenderCallback, delta: number) => {
+    useFrame((state: RootState, delta: number) => {
         if (ref.current) {
-            dummy.lookAt(state.pointer.x, state.pointer.y, 1);
+            dummy.lookAt(state.pointer!.x, state.pointer!.y, 1);
             easing.dampQ(ref.current.quaternion, dummy.quaternion, 0.15, delta);
         }
 
     });
     return (
-        <mesh {...props} ref={ref} geometry={nodes.Suzanne.geometry} scale={2}>
+        <mesh {...props} ref={ref} geometry={nodes.Suzanne.geometry!} scale={2}>
             <meshMatcapMaterial />
         </mesh>
     );
