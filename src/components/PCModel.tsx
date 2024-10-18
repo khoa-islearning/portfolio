@@ -1,27 +1,50 @@
-import * as THREE from "three";
-import { useRef, useState } from "react";
-import { Canvas, RenderCallback, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import "@/styles/components/About.sass";
-import { easing } from "maath";
-import { useGLTF } from "@react-three/drei";
+import { ContactShadows, Environment, Float, Html, PresentationControls, useGLTF } from "@react-three/drei";
 
 function Box(props: JSX.IntrinsicElements["mesh"]) {
     // This reference will give us direct access to the THREE.Mesh object
-    const ref = useRef<THREE.Mesh>(null);
-    const { nodes } = useGLTF("./suzanne.glb");
-    const [dummy] = useState<THREE.Object3D>(() => new THREE.Object3D());
-
-    useFrame((state: RenderCallback, delta: number) => {
-        if (ref.current) {
-            dummy.lookAt(state.pointer.x, state.pointer.y, 1);
-            easing.dampQ(ref.current.quaternion, dummy.quaternion, 0.15, delta);
-        }
-    });
+    const nodes = useGLTF("./laptop.gltf");
 
     return (
-        <mesh {...props} ref={ref} geometry={nodes.Suzanne.geometry} scale={2}>
-            <meshMatcapMaterial />
-        </mesh>
+        <>
+            <Environment preset='city' />
+
+
+            <PresentationControls global
+                rotation={[0.13, 0.1, 0]}
+                polar={[-0.4, 0.2]}
+                azimuth={[-1, 0.75]}
+                config={{ mass: 2, tension: 400 }}
+                snap={{ mass: 4, tension: 400 }}
+            >
+                <Float rotationIntensity={0.4}>
+                    <rectAreaLight
+                        width={5}
+                        height={5}
+                        intensity={65}
+                        color={'#ff6900'}
+                        rotation={[0.1, Math.PI, 0]}
+                        position={[0, 0.55, -1.15]}
+                    />
+                    <primitive {...props} object={nodes.scene} scale={1} rotation-x={0.5} rotation-y={0.75} position-y={-1}>
+                        <Html
+                            transform
+                            wrapperClass='htmlScreen'
+                            distanceFactor={1.17}
+                            position={[0, 1.56, -1.4]}
+                            rotation-x={-0.256}
+                            scale-x={3.4}
+                            scale-y={4.3}
+                        >
+                            <iframe src='https://bruno-simon.com/' />
+                        </Html>
+                    </primitive>
+                </Float>
+            </PresentationControls>
+
+            <ContactShadows position-y={-1.4} opacity={0.4} scale={5} blur={2.4} />
+        </>
     );
 }
 
@@ -30,9 +53,6 @@ export default function PCModel() {
     return (
         <div className="head-canvas">
             <Canvas>
-                <ambientLight intensity={0.5} />
-                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-                <pointLight position={[-10, -10, -10]} />
                 <Box position={[0, 0, 0]} />
             </Canvas>
         </div>
