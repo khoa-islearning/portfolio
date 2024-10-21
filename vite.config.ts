@@ -4,14 +4,14 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/portfolio",
-  build: {
-    outDir: "dist",
-  },
-  resolve: {
-    alias: {
-      "@": path.join(__dirname, "./src/"),
+    base: "/portfolio/",
+    build: {
+        outDir: "dist",
     },
-  },
-  plugins: [react()],
+    resolve: {
+        alias: {
+            "@": path.join(__dirname, "./src/"),
+        },
+    },
+    plugins: [react()],
 });
