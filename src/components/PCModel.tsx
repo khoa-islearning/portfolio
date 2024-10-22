@@ -4,11 +4,12 @@ import { ContactShadows, Environment, Float, Html, PresentationControls, useGLTF
 
 function Box(props: JSX.IntrinsicElements["mesh"]) {
     // This reference will give us direct access to the THREE.Mesh object
-    const nodes = useGLTF("./laptop.gltf");
+    const nodes = useGLTF("./discman.glb");
 
     return (
+        //<iframe src='https://bruno-simon.com/' />
         <>
-            <Environment preset='city' />
+            <Environment preset='park' />
 
 
             <PresentationControls global
@@ -23,11 +24,11 @@ function Box(props: JSX.IntrinsicElements["mesh"]) {
                         width={5}
                         height={5}
                         intensity={65}
-                        color={'#ff6900'}
+                        color={'#edf4ab'}
                         rotation={[0.1, Math.PI, 0]}
                         position={[0, 0.55, -1.15]}
                     />
-                    <primitive {...props} object={nodes.scene} scale={1} rotation-x={0.5} rotation-y={0.75} position-y={-1}>
+                    <primitive {...props} object={nodes.scene} scale={25} rotation-x={0.5} rotation-y={0.75} position-y={-0.5}>
                         <Html
                             transform
                             wrapperClass='htmlScreen'
@@ -37,7 +38,6 @@ function Box(props: JSX.IntrinsicElements["mesh"]) {
                             scale-x={3.4}
                             scale-y={4.3}
                         >
-                            <iframe src='https://bruno-simon.com/' />
                         </Html>
                     </primitive>
                 </Float>
